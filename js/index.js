@@ -15,6 +15,7 @@ window.onload = () => {
   function startGame() {
     let blueCar = new Car;
     blueCar.draw();
+    //obstacles
     let obstacleOne = new Obstacle("pink");
     obstacleOne.draw();
 
@@ -24,7 +25,6 @@ window.onload = () => {
     } else if (e.keyCode === 39){
        blueCar.moveRigth()
     }
-    console.log(e)
   })
   
     function update() {
@@ -91,5 +91,25 @@ class Obstacle {
     }
 }
 
-//moving obstacles
+
+
+// function updateObstacles() {
+//   setInterval(createObstacle, 1000)
+//   new Obstacle("pink")
+// }
+
+
+//obstacle collisions & points
+
+// const gameEnd = () => {
+//   if (obstacleOne.contains(blueCar)){}
+//     //gameStop
+// }
+
+//you'll gain points for the time you spend on the game: for each half second, counter++ 
+// || when craches, score stops running
+
+
+
+
 

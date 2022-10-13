@@ -5,6 +5,7 @@ background.src = "./images/road.png";
 const car = new Image();
 car.src = "./images/car.png";
 
+//Obstacles
 
 window.onload = () => {
   document.getElementById('start-button').onclick = () => {
@@ -12,8 +13,83 @@ window.onload = () => {
   };
 
   function startGame() {
-    ctx.drawImage(background,0,0, canvas.width, canvas.height);
-    ctx.drawImage(car, (canvas.width / 2 - 25), (canvas.height -70), 50, 70);
-  }
-};
+    let blueCar = new Car;
+    blueCar.draw();
+    let obstacleOne = new Obstacle("pink");
+    obstacleOne.draw();
 
+    document.addEventListener("keydown", (e) => {
+      if (e.keyCode === 37){
+       blueCar.moveLeft()
+    } else if (e.keyCode === 39){
+       blueCar.moveRigth()
+    }
+    console.log(e)
+  })
+  
+    function update() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.drawImage(background,0,0, canvas.width, canvas.height);
+      blueCar.draw();
+      obstacleOne.draw()
+    
+      requestAnimationFrame(update)
+    }
+      requestAnimationFrame(update)
+  };
+  }
+  
+
+
+class Car {
+  constructor(){
+    this.x = (canvas.width/2),
+    this.y = canvas.height - 100,
+    this.w = 50,
+    this.h = 80
+    //this.speed = 15
+  }
+  draw() {
+    ctx.drawImage(car, this.x, this.y, this.w, this.h);
+  }
+  //moving the car
+  moveLeft(){
+    console.log("moveLeft")
+    if (this.x < 100) {
+    return;
+    }
+    this.x -= 30;
+    
+  }
+  
+  moveRigth(){
+    console.log("mover")
+    if (this.x > canvas.width - 150) {
+     return;
+    }
+    this.x += this.w;
+    console.log("esto es x", this.x)
+  }
+}
+
+
+class Obstacle {
+  constructor (color) {
+    this.x = Math.floor(Math.random() * canvas.width),
+    this.y = 0,
+    this.w = Math.floor(Math.random() * canvas.width)
+    this.h = 15,
+    this.color = color,
+    this.speed = 15
+  }
+  draw() {
+    ctx.fillStyle = this.color
+    ctx.fillRect(this.x, this.y, this.w, this.h)
+  }
+}
+
+
+
+
+
+// key controllers

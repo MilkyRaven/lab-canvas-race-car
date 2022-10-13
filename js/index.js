@@ -32,6 +32,7 @@ window.onload = () => {
       ctx.drawImage(background,0,0, canvas.width, canvas.height);
       blueCar.draw();
       obstacleOne.draw()
+      obstacleOne.moves()
     
       requestAnimationFrame(update)
     }
@@ -76,20 +77,19 @@ class Car {
 class Obstacle {
   constructor (color) {
     this.x = Math.floor(Math.random() * canvas.width),
-    this.y = 0,
-    this.w = Math.floor(Math.random() * canvas.width)
+    this.y = 10,
+    this.w = Math.floor(Math.random() * 300 + 30)
     this.h = 15,
-    this.color = color,
-    this.speed = 15
-  }
-  draw() {
+    this.color = color}  
+  
+    draw() {
     ctx.fillStyle = this.color
     ctx.fillRect(this.x, this.y, this.w, this.h)
   }
+    moves() {
+    this.y += 3
+    }
 }
 
+//moving obstacles
 
-
-
-
-// key controllers

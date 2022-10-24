@@ -6,6 +6,9 @@ const car = new Image();
 car.src = "./images/car.png";
 let gameOn = true;
 
+//score
+let score = 0;
+
 //Obstacles
 
 window.onload = () => {
@@ -14,6 +17,11 @@ window.onload = () => {
   };
 
   function startGame() {
+    setInterval (() => {
+      if (gameOn === true)
+        score += 10;
+      console.log(score)
+      }, 1000)
     update()
   }
 
@@ -32,15 +40,20 @@ window.onload = () => {
   }
 
     const update = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
       if (gameOn){
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(background,0,0, canvas.width, canvas.height);
       blueCar.draw();
+      ctx.fillText(`Your Score: ${score}`, 10, 50);
       for (let i = 0; i < arrayObstacles.length; i++) {
         arrayObstacles[i].drawObstacles() 
         if (blueCar.contains(arrayObstacles[i])){
           gameOn = false;
-            
+          console.log(gameOn)
+
+          ctx.fillText(`You've lost!`, 80, 80);
+
+
       }
     }
       }
@@ -106,17 +119,3 @@ class Obstacle {
 }
 
 const arrayObstacles = [];
-
-
-
-
-
-//obstacle collisions & points
-
-// const gameEnd = () => {
-//   if (obstacleOne.contains(blueCar)){}
-//     //gameStop
-// }
-
-//you'll gain points for the time you spend on the game: for each half second, counter++ 
-// || when craches, score stops running
